@@ -18,11 +18,17 @@ numbers.splice(2, 2, 8, 9, 10);
 console.log(numbers);
 // numbers = []
 
+console.log(numbers.slice(2, 5));
+console.log(numbers);
+
 const person = {
   firstName: "Matteo Antony",
   lastName: "Mistretta",
   birthCity: "Rome",
   birthDate: "17/10/1982",
+  sayHello() {
+    return "Hello!";
+  },
 };
 
 // square bracket notation
@@ -45,3 +51,5 @@ console.log(person);
 
 const propertyName = "lastName";
 console.log(person[propertyName]);
+
+console.log(person.sayHello());
