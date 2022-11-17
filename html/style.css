@@ -1,0 +1,25 @@
+:root {
+  --background-color: green;
+}
+
+/* CSS - Cascading Style Sheets */
+h1 {
+  color: #4026d67a !important;
+  color: rgba(34, 7, 85, 43);
+}
+
+h1.subtitle {
+  color: purple;
+}
+
+#sub-subtitle {
+  color: var(--background-color);
+}
+
+ul li:first-child {
+  color: var(--background-color);
+}
+
+p {
+  background-color: blue;
+}

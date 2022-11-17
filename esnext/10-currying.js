@@ -1,3 +1,5 @@
+const numbers = [1, 2, 3, 4, 5];
+
 {
   // function sum(a, b) {
   //   return a + b;
@@ -6,6 +8,8 @@
 
   console.log(sum(2, 3));
   console.log(sum(2, 7));
+
+  console.log(numbers.map((item) => sum(2, item)));
 }
 
 {
@@ -23,6 +27,8 @@
 
   console.log(sum(2)(3));
   console.log(sum(2)(7));
+
+  console.log(numbers.map(sumTwo));
 }
 
 // {
