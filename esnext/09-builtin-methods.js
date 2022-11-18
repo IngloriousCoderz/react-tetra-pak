@@ -80,13 +80,13 @@ console.log(numbers.find(isEven));
 console.log(numbers.findIndex(isEven));
 
 {
-  let hasEven = false;
+  let hasEven = false; // inizializzazione
   for (const item of numbers) {
     if (isEven(item)) {
-      hasEven = true;
+      hasEven = true; // accumulo
     }
   }
-  console.log(hasEven);
+  console.log(hasEven); // ritorno
 }
 
 console.log(numbers.some(isEven));
@@ -160,3 +160,10 @@ console.log(sumOfNumbers);
       .reduce(sum);
   }
 }
+
+numbers.reduce((acc, item) => {
+  if (isEven(item)) {
+    acc.push(item);
+    return acc;
+  }
+}, []);

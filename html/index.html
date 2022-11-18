@@ -7,6 +7,8 @@
     <title>My Todo List</title>
 
     <link rel="stylesheet" href="style.css" />
+
+    <style></style>
   </head>
   <body>
     <h1>Heading di livello 1</h1>
@@ -16,7 +18,7 @@
     <h4>Heading di livello 4</h4>
     <h5 id="sub-subtitle">Heading di livello 5</h5>
     <h6>Heading di livello 6</h6>
-    <p style="background-color: aqua">
+    <p style="background-color: aqua; color: blue">
       Paragrafo <span>testo</span> altro testo, una qualsiasi modifica
     </p>
     <ol>
@@ -30,16 +32,21 @@
     <div>Blocco</div>
     <form>
       <input />
-      <button>Click me!</button>
+      <button onclick="handleClick()">Click me!</button>
     </form>
     <a href="http://www.google.com" target="_blank">Go to Google</a>
     <img src="puppy.jpg" alt="Immagine di un cucciolo" />
 
-    <!-- <script>
-      console.log("Hello world!");
+    <script>
+      function handleClick(event) {
+        console.log(event);
+      }
 
-      console.log(document.querySelectorAll("li"));
-    </script> -->
+      const button = document.querySelector("button");
+      button.onclick = handleClick;
+
+      button.addEventListener("click", handleClick);
+    </script>
 
     <script src="script.js"></script>
   </body>
