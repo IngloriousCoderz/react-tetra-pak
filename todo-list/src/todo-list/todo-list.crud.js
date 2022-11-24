@@ -1,3 +1,4 @@
+// React HOOKS
 import { useState } from "react";
 
 import classes from "./todo-list.module.scss";
@@ -10,24 +11,43 @@ const DEFAULT_TASKS = [
 
 function TodoList({ name }) {
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
-  const [text, setText] = useState("");
-
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // clone
+    // const clone = [...tasks];
+    // clone.push(newTask);
+    // setTasks(clone);
+
+    // concatenation
     setTasks((tasks) => {
       const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
-      const newTask = { id: maxId + 1, text };
+      const newTask = { id: maxId + 1, text: "New task" };
       return [...tasks, newTask];
-    });
-    setText("");
+    }); // changes are async!
   };
 
   const handleToggleCompleted = (id) => {
+    // clone
+    // const clone = [...tasks]; // shallow clone
+    // const index = clone.findIndex((task) => task.id === id);
+    // const clonedTask = { ...clone[index] };
+    // clonedTask.completed = !clonedTask.completed;
+    // clone[index] = clonedTask;
+    // setTasks(clone);
+
+    // sandwich
+    // setTasks((tasks) => {
+    //   const index = tasks.findIndex((task) => task.id === id);
+    //   return [
+    //     ...tasks.slice(0, index),
+    //     { ...tasks[index], completed: !tasks[index].completed },
+    //     ...tasks.slice(index + 1),
+    //   ];
+    // });
+
+    // map
     setTasks((tasks) =>
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
@@ -36,6 +56,23 @@ function TodoList({ name }) {
   };
 
   const handleRemove = (id) => {
+    // clone
+    // const clone = [...tasks];
+    // const index = clone.findIndex((task) => task.id === id);
+    // clone.splice(index, 1);
+    // setTasks(clone);
+
+    // sandwich
+    // setTasks((tasks) => {
+    //   const index = tasks.findIndex((task) => task.id === id);
+    //   return [
+    //     //
+    //     ...tasks.slice(0, index),
+    //     ...tasks.slice(index + 1),
+    //   ];
+    // });
+
+    // filter
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
   };
 
@@ -43,12 +80,7 @@ function TodoList({ name }) {
     <>
       <h1>{name}'s Todo List</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          placeholder="What next?"
-          autoFocus
-          value={text}
-          onChange={handleChange}
-        />
+        <input placeholder="What next?" autoFocus />
         <button>Add</button>
       </form>
       <ul>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import classes from "./todo-list.module.scss";
 
@@ -10,21 +10,17 @@ const DEFAULT_TASKS = [
 
 function TodoList({ name }) {
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
-  const [text, setText] = useState("");
-
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
+  const input = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setTasks((tasks) => {
       const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
-      const newTask = { id: maxId + 1, text };
+      const newTask = { id: maxId + 1, text: input.current.value };
+      input.current.value = "";
       return [...tasks, newTask];
     });
-    setText("");
   };
 
   const handleToggleCompleted = (id) => {
@@ -43,12 +39,7 @@ function TodoList({ name }) {
     <>
       <h1>{name}'s Todo List</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          placeholder="What next?"
-          autoFocus
-          value={text}
-          onChange={handleChange}
-        />
+        <input placeholder="What next?" autoFocus ref={input} />
         <button>Add</button>
       </form>
       <ul>
