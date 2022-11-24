@@ -1,7 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
-import Form from "./form";
-import List from "./list";
+import classes from "./todo-list.module.scss";
 
 const DEFAULT_TASKS = [
   { id: 1, text: "Learn React", completed: true },
@@ -28,27 +27,44 @@ function TodoList({ name }) {
     setText("");
   };
 
-  const handleToggleCompleted = useCallback((id) => {
+  const handleToggleCompleted = (id) => {
     setTasks((tasks) =>
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-  }, []);
+  };
 
-  const handleRemove = useCallback((id) => {
+  const handleRemove = (id) => {
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
-  }, []);
+  };
 
   return (
     <>
       <h1>{name}'s Todo List</h1>
-      <Form text={text} onChange={handleChange} onSubmit={handleSubmit} />
-      <List
-        tasks={tasks}
-        onToggleCompleted={handleToggleCompleted}
-        onRemove={handleRemove}
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="What next?"
+          autoFocus
+          value={text}
+          onChange={handleChange}
+        />
+        <button>Add</button>
+      </form>
+      <ul>
+        {tasks.map(({ id, text, completed }) => (
+          <li key={id}>
+            <span
+              className={completed ? classes.completed : null}
+              onClick={() => handleToggleCompleted(id)}
+            >
+              {text}
+            </span>
+            &nbsp;
+            <button onClick={() => handleRemove(id)}>x</button>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

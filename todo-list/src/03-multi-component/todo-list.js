@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 import Form from "./form";
 import List from "./list";
@@ -28,17 +28,17 @@ function TodoList({ name }) {
     setText("");
   };
 
-  const handleToggleCompleted = useCallback((id) => {
+  const handleToggleCompleted = (id) => {
     setTasks((tasks) =>
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-  }, []);
+  };
 
-  const handleRemove = useCallback((id) => {
+  const handleRemove = (id) => {
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
-  }, []);
+  };
 
   return (
     <>
