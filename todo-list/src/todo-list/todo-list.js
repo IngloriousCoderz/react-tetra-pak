@@ -11,21 +11,13 @@ const DEFAULT_TASKS = [
 
 function TodoList({ name }) {
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
-  const [text, setText] = useState("");
 
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = (text) => {
     setTasks((tasks) => {
       const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
       const newTask = { id: maxId + 1, text };
       return [...tasks, newTask];
     });
-    setText("");
   };
 
   const handleToggleCompleted = (id) => {
@@ -43,7 +35,7 @@ function TodoList({ name }) {
   return (
     <>
       <h1>{name}'s Todo List</h1>
-      <Form text={text} onChange={handleChange} onSubmit={handleSubmit} />
+      <Form onSubmit={handleSubmit} />
       <List
         tasks={tasks}
         onToggleCompleted={handleToggleCompleted}
