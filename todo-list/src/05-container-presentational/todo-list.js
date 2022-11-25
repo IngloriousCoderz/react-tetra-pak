@@ -13,17 +13,6 @@ const DEFAULT_TASKS = [
 function TodoList({ name }) {
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
 
-  // useEffect(() => {}, []) // === componentDidMount
-  // useEffect(() => {}, [tasks]) // === componentDidMount + componentDidUpdate
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     console.log("A second has passed");
-  //   }, 1000);
-  //   return () => { // componentWillUnmount
-  //     clearInterval(id);
-  //   };
-  // }, []);
-
   const handleSubmit = (text) => {
     setTasks((tasks) => {
       const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
