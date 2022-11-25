@@ -1,4 +1,8 @@
+import { memo } from "react";
+
 import classes from "./list.module.scss";
+
+// memoization
 
 function List({ tasks, onToggleCompleted, onRemove }) {
   console.log("render");
@@ -21,4 +25,4 @@ function List({ tasks, onToggleCompleted, onRemove }) {
   );
 }
 
-export default List;
+export default memo(List);
