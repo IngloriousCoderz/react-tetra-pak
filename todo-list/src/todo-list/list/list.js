@@ -1,5 +1,10 @@
+import PropTypes from "prop-types";
+
 import classes from "./list.module.scss";
 
+/**
+ * List of tasks in my todo list.
+ */
 function List({ tasks, onToggleCompleted, onRemove }) {
   console.log("render");
 
@@ -20,5 +25,21 @@ function List({ tasks, onToggleCompleted, onRemove }) {
     </ul>
   );
 }
+
+List.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string,
+      completed: PropTypes.bool,
+    })
+  ).isRequired,
+  onToggleCompleted: PropTypes.func,
+  onRemove: PropTypes.func,
+};
+
+List.defaultProps = {
+  tasks: [],
+};
 
 export default List;
