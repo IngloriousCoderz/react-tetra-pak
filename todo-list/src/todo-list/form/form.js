@@ -1,25 +1,13 @@
-import { useState } from "react";
+// presentational component / container component
 
-function Form({ onSubmit }) {
-  const [text, setText] = useState("");
-
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(text);
-    setText("");
-  };
-
+function Form({ text, onChange, onSubmit }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <input
         placeholder="What next?"
         autoFocus
         value={text}
-        onChange={handleChange}
+        onChange={onChange}
       />
       <button>Add</button>
     </form>
