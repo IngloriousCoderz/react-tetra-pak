@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import FormComponent from "./form";
-
 function Form({ onSubmit }) {
   const [text, setText] = useState("");
 
@@ -16,11 +14,15 @@ function Form({ onSubmit }) {
   };
 
   return (
-    <FormComponent
-      text={text}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    />
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder="What next?"
+        autoFocus
+        value={text}
+        onChange={handleChange}
+      />
+      <button>Add</button>
+    </form>
   );
 }
 
