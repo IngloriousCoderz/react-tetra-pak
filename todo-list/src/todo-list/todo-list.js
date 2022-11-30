@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// import Form from "./form/index.with-logic";
+import * as api from "./services/api";
+
 import Form from "./form";
 import List from "./list";
 
-const DEFAULT_TASKS = [
-  { id: 1, text: "Learn React", completed: true },
-  { id: 2, text: "Look for a job", completed: false },
-  { id: 3, text: "Forget everything" },
-];
+const DEFAULT_TASKS = [];
 
 function TodoList({ name }) {
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
+
+  useEffect(() => {
+    api.retrieveTasks().then(setTasks);
+  }, []);
 
   // useEffect(() => {}, []) // === componentDidMount
   // useEffect(() => {}, [tasks]) // === componentDidMount + componentDidUpdate
@@ -24,24 +25,20 @@ function TodoList({ name }) {
   //   };
   // }, []);
 
-  const handleSubmit = (text) => {
-    setTasks((tasks) => {
-      const maxId = tasks.length ? tasks[tasks.length - 1].id : 0;
-      const newTask = { id: maxId + 1, text };
-      return [...tasks, newTask];
-    });
+  const handleSubmit = async (text) => {
+    await api.createTask({ text });
+    api.retrieveTasks().then(setTasks);
   };
 
-  const handleToggleCompleted = (id) => {
-    setTasks((tasks) =>
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  const handleToggleCompleted = async (id) => {
+    const { completed } = tasks.find((task) => task.id === id);
+    await api.updateTask(id, { completed: !completed });
+    api.retrieveTasks().then(setTasks);
   };
 
-  const handleRemove = (id) => {
-    setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  const handleRemove = async (id) => {
+    await api.deleteTask(id);
+    api.retrieveTasks().then(setTasks);
   };
 
   return (
