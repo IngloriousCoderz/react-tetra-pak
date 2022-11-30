@@ -14,7 +14,7 @@ it("should decrement by a certain amount", () => {
   expect(counter.value).toBe(-2);
 });
 
-it("reset the value", () => {
+it("should reset the value", () => {
   counter.reset();
 
   expect(counter.value).toBe(0);
