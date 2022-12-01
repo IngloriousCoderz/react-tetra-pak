@@ -1,5 +1,5 @@
 import text, { SET_TEXT } from "./text";
-import tasks, { REMOVE_TASK } from "./tasks";
+import tasks, { REMOVE_TASK, TOGGLE_COMPLETED } from "./tasks";
 
 export default function todoList(state, action) {
   switch (action.type) {
@@ -9,6 +9,7 @@ export default function todoList(state, action) {
         text: text(state.text, action),
       };
 
+    case TOGGLE_COMPLETED:
     case REMOVE_TASK:
       return {
         ...state,
