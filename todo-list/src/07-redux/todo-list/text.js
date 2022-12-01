@@ -1,4 +1,4 @@
-const SET_TEXT = "set-text";
+export const SET_TEXT = "set-text";
 
 export const setText = (text) => ({
   type: SET_TEXT,

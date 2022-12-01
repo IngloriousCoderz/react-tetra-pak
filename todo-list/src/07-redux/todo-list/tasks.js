@@ -1,7 +1,7 @@
 // action types
-const ADD_TASK = "add-task";
-const TOGGLE_COMPLETED = "toggle-completed";
-const REMOVE_TASK = "remove-task";
+export const ADD_TASK = "add-task";
+export const TOGGLE_COMPLETED = "toggle-completed";
+export const REMOVE_TASK = "remove-task";
 
 // action creators
 export const addTask = (text) => ({ type: ADD_TASK, payload: text });
