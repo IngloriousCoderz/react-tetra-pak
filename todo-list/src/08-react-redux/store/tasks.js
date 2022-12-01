@@ -3,8 +3,6 @@ export const ADD_TASK = "add-task";
 export const TOGGLE_COMPLETED = "toggle-completed";
 export const REMOVE_TASK = "remove-task";
 
-export const SET_TASKS = "set-tasks";
-
 // action creators
 export const addTask = (text) => ({ type: ADD_TASK, payload: text });
 export const toggleCompleted = (id) => ({
@@ -12,8 +10,6 @@ export const toggleCompleted = (id) => ({
   payload: id,
 });
 export const removeTask = (id) => ({ type: REMOVE_TASK, payload: id });
-
-export const setTasks = (tasks) => ({ type: SET_TASKS, payload: tasks });
 
 // reducer
 export default function tasks(state = [], action) {
@@ -32,9 +28,6 @@ export default function tasks(state = [], action) {
 
     case REMOVE_TASK:
       return state.filter((task) => task.id !== action.payload);
-
-    case SET_TASKS:
-      return action.payload;
 
     default:
       return state;
