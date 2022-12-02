@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./11-async-thunks";
+import App from "./12-react-router";
 
 // import "./07-redux/todo-list";
 
