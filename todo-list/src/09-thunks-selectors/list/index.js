@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { removeTask, toggleCompleted } from "./tasks.slice";
+import { fetchTasks, removeTask, toggleCompleted } from "../store/thunks";
+import { selectTasks } from "../store/tasks";
 import ListComponent from "./list";
 
 function List() {
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector(selectTasks);
   const dispatch = useDispatch();
+
+  // const task = useSelector((state) => selectTask(state, id))
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, []);
 
   const handleToggleCompleted = (id) => {
     dispatch(toggleCompleted(id));

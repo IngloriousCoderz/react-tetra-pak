@@ -1,27 +1,31 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
-// action types
-export const SET_TASKS = "set-tasks";
+export const addTask = createAction("add-task");
+export const toggleCompleted = createAction("toggle-completed");
+export const removeTask = createAction("remove-task");
 
-// action creators
-export const setTasks = (tasks) => ({ type: SET_TASKS, payload: tasks });
+export default createReducer([], {
+  [addTask](state, action) {
+    const maxId = state.length ? state[state.length - 1].id : 0;
+    const newTask = { id: maxId + 1, text: action.payload };
+    state.push(newTask);
 
-// reducer
-export default function tasks(state = [], action) {
-  switch (action.type) {
-    case SET_TASKS:
-      return action.payload;
+    // return [...state, newTask];
+  },
+  [toggleCompleted](state, action) {
+    const task = state.find((task) => task.id === action.payload);
+    task.completed = !task.completed;
 
-    default:
-      return state;
-  }
-}
+    // return state.map((task) =>
+    //   task.id === action.payload
+    //     ? { ...task, completed: !task.completed }
+    //     : task
+    // );
+  },
+  [removeTask](state, action) {
+    const index = state.findIndex((task) => task.id === action.payload);
+    state.splice(index, 1);
 
-// selectors
-export const selectTasks = (state) => state.tasks;
-
-export const selectTask = createSelector(
-  selectTasks,
-  (_, id) => id,
-  (tasks, id) => tasks.find((task) => task.id === id)
-);
+    // return state.filter((task) => task.id !== action.payload);
+  },
+});

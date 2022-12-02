@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import text from "../form/text.slice";
-import tasks from "../list/tasks.slice";
+import text from "./text";
+import tasks from "./tasks";
 
 export const store = configureStore({ reducer: { text, tasks } });

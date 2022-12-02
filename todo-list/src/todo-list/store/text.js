@@ -1,19 +1,14 @@
-export const SET_TEXT = "set-text";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
-export const setText = (text) => ({
-  type: SET_TEXT,
-  payload: text,
+import { addTask } from "./tasks";
+
+export const setText = createAction("set-text");
+
+export default createReducer("", {
+  [setText](state, action) {
+    return action.payload;
+  },
+  [addTask](state, action) {
+    return "";
+  },
 });
-
-export default function text(state = "", action) {
-  switch (action.type) {
-    case SET_TEXT:
-      return action.payload;
-
-    default:
-      return state;
-  }
-}
-
-// selectors
-export const selectText = (state) => state.text;
