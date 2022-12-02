@@ -1,5 +1,3 @@
-import { ADD_TASK } from "./tasks";
-
 export const SET_TEXT = "set-text";
 
 export const setText = (text) => ({
@@ -12,10 +10,10 @@ export default function text(state = "", action) {
     case SET_TEXT:
       return action.payload;
 
-    case ADD_TASK:
-      return "";
-
     default:
       return state;
   }
 }
+
+// selectors
+export const selectText = (state) => state.text;

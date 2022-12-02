@@ -1,5 +1,6 @@
 import * as api from "../services/api";
 import { setTasks } from "./tasks";
+import { setText } from "./text";
 
 export const fetchTasks = () => async (dispatch) => {
   const tasks = await api.retrieveTasks();
@@ -9,6 +10,7 @@ export const fetchTasks = () => async (dispatch) => {
 export const addTask = (text) => async (dispatch) => {
   await api.createTask({ text });
   dispatch(fetchTasks());
+  dispatch(setText(""));
 };
 
 export const toggleCompleted = (id) => async (dispatch, getState) => {

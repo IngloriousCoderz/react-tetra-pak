@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addTask } from "../store/tasks";
-import { setText } from "../store/text";
+import { addTask } from "../store/thunks";
+import { setText, selectText } from "../store/text";
 
 import FormComponent from "./form";
 
 function Form({ onSubmit }) {
-  const text = useSelector((state) => state.text);
+  const text = useSelector(selectText);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
